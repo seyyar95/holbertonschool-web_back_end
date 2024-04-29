@@ -5,7 +5,7 @@ Model that defines a type-annotated function element_length
 from typing import Iterable, List, Tuple, Sequence
 
 
-def element_length(lst: Iterable[str]) -> List[Tuple[Sequence, int]]:
+def element_length(lst: Iterable[Sequence]) -> List[Tuple[Sequence, int]]:
     """
     Returns a list of integers representing the lengths of the strings in lst.
     """
