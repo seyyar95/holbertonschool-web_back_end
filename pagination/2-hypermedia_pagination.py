@@ -37,7 +37,9 @@ class Server:
         """Get hypermedia pagination
         """
         data = self.get_page(page, page_size)
-        total_pages = len(self.dataset()) // page_size
+        total_pages = len(self.dataset()) // page_size\
+            if len(self.dataset()) % page_size == 0\
+            else len(self.dataset()) // page_size + 1
         next_page = page + 1 if page < total_pages else None
         prev_page = page - 1 if page > 1 else None
         return {
