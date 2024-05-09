@@ -43,7 +43,6 @@ class Server:
         """Return a dictionary with the following key-value pairs
         """
         assert 0 <= index < len(self.dataset())
-        data = self.indexed_dataset()
         start = index if index is not None else 0
         next_index = start + page_size
         data = self.dataset()[start: next_index]
@@ -52,7 +51,7 @@ class Server:
             data = list(self.indexed_dataset().values())[start: next_index - 1]
         return {
             "index": start,
-            "data": data,
-            "page_size": page_size,
             "next_index": next_index,
+            "page_size": page_size,
+            "data": data,
             }
