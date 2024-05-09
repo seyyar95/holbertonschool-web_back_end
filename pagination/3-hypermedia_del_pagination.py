@@ -44,12 +44,15 @@ class Server:
         """
         assert index < len(self.dataset())
         data = self.indexed_dataset()
-        data_values = list(data.values())
-        next_index = index + page_size
+        start = index if index is not None else 0
+        next_index = start + page_size
+        data = self.dataset()[start: next_index]
+        if not self.__indexed_dataset.get(index):
+            next_index += 1
+            data = list(self.indexed_dataset().values())[start: next_index - 1]
         return {
-            "index": index if index is not None else 0,
-            "data": data_values[index: next_index],
+            "index": start,
+            "data": data,
             "page_size": page_size,
             "next_index": next_index,
-            "page_size": page_size
             }
