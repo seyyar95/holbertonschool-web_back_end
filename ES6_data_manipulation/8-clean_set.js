@@ -1,23 +1,15 @@
-/* eslint-disable */
 export default function cleanSet(set, startString) {
-  let newStr = '';
-  const length = startString.length;
-
-  if (length === 0) {
+  if (typeof startString !== 'string' || startString === '') {
     return '';
   }
 
-  for (let i = 0; i <= set.size; i++) {
-    const str = set.values().next().value;
-    set.delete(str);
+  const result = [];
 
-    if (str.includes(startString)) {
-      newStr += str.slice(length);
-      if (i <= set.size - 1) {
-        newStr += '-';
-      }
+  for (const value of set) {
+    if (value.startsWith(startString)) {
+      result.push(value.slice(startString.length));
     }
   }
 
-  return newStr;
+  return result.join('-');
 }
